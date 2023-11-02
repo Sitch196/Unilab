@@ -2,6 +2,7 @@ import React from "react";
 import clipboard from "../../assets/pngegg 1.png";
 import background from "../../assets/stars.png";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Landing = () => {
   return (
@@ -9,7 +10,9 @@ const Landing = () => {
       <ContentWrapper>
         <Image src={clipboard} alt="image" />
         <Title>Get Started Today</Title>
-        <Button>Get Started</Button>
+        <Link to="/register">
+          <Button>Get Started</Button>
+        </Link>
       </ContentWrapper>
     </PageWrapper>
   );
@@ -18,7 +21,7 @@ const Landing = () => {
 export default Landing;
 
 const PageWrapper = styled.div`
-  background-color: black;
+  background-color: #151718;
   background-image: url(${background});
   width: 100%;
   height: 100vh;
@@ -57,6 +60,7 @@ const Button = styled.button`
   width: 359px;
   height: 79px;
   border: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.5rem;
   font-weight: bold;
   border-radius: 2px;

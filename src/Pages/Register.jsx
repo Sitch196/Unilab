@@ -145,5 +145,4 @@ const Button = styled.button`
   font-size: medium;
   cursor: pointer;
   opacity: ${(props) => (props.disabled ? "0.7" : "1")};
-  pointer-events: ${(props) => (props.disabled ? "none" : "auto")};
 `;

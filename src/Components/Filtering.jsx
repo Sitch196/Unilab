@@ -1,13 +1,21 @@
 import styled from "styled-components";
 import filter from "../../assets/filter.png";
 import search from "../../assets/search.png";
+import { Link } from "react-router-dom";
 const Filtering = () => {
+  const handleSignOut = () => {
+    localStorage.removeItem("imageURL");
+    localStorage.removeItem("name");
+  };
   return (
     <Filter>
       <FilterWrapper>
         <FilterIcon src={filter} alt="filter icon" />
         <FilterTitle>Filter</FilterTitle>
       </FilterWrapper>
+      <SignOutButton to="/register" onClick={handleSignOut}>
+        Sign Out
+      </SignOutButton>
       <SearchWrapper>
         <Icon src={search} alt="search icon" />
         <Input type="text" />
@@ -23,6 +31,7 @@ const Filter = styled.div`
   height: 4rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   z-index: 10;
 `;
 const FilterTitle = styled.p`
@@ -56,11 +65,25 @@ const SearchWrapper = styled.div`
 `;
 const FilterWrapper = styled.div`
   width: 250px;
-  height: 3.5rem;
+  height: 3.1rem;
   border-radius: 20px;
   background-color: white;
   display: flex;
   align-items: center;
   padding-left: 1rem;
   gap: 3.5rem;
+`;
+const SignOutButton = styled(Link)`
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  background-color: #e64545;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0.8rem 2rem;
+  margin-left: 30rem;
 `;

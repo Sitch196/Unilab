@@ -14,12 +14,6 @@ const Navbar = () => {
     setIsModalOpen(false);
   };
 
-  const handleSignOut = () => {
-    // Remove items from local storage
-    localStorage.removeItem("imageURL");
-    localStorage.removeItem("name");
-  };
-
   const savedImageURL = localStorage.getItem("imageURL");
   const savedName = localStorage.getItem("name");
 
@@ -28,13 +22,12 @@ const Navbar = () => {
       <NavBar>
         <LeftSection>
           <h1>Form</h1>
-          <SignOutButton to="/register" onClick={handleSignOut}>
-            Sign Out
-          </SignOutButton>
         </LeftSection>
         <RightSection>
           <UserDetails>
-            <APIButton>API</APIButton>
+            <Link to="api">
+              <APIButton>API</APIButton>
+            </Link>
             <UserName>{savedName}</UserName>
             <UserImage
               src={savedImageURL}
@@ -96,16 +89,6 @@ const UserName = styled.div`
   font-weight: bold;
 
   margin: 0 1rem;
-`;
-
-const SignOutButton = styled(Link)`
-  color: white;
-  text-decoration: none;
-  padding: 10px 20px;
-  background-color: #e64545;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 2.5rem;
 `;
 
 const APIButton = styled.button`

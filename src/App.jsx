@@ -3,6 +3,7 @@ import { createGlobalStyle } from "styled-components";
 import { Route, Routes } from "react-router-dom";
 import Register from "./Pages/Register";
 import Dashboard from "./Pages/Dashboard";
+import ApiPage from "./Pages/ApiPage";
 const GlobalStyle = createGlobalStyle`
       *{
         margin: 0;
@@ -20,6 +21,7 @@ const App = () => (
         <Route path="/" element={<Landing />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/api" element={<ApiPage />} />
       </Routes>
     </div>
   </>

@@ -3,10 +3,8 @@ import userData from "../../data";
 import { useState } from "react";
 import Filtering from "./Filtering";
 import Pagination from "./Pagination";
-
-const DataModal = ({ isOpen, closeModal }) => {
+const Modal = ({ isOpen, closeModal }) => {
   const [currentPage, setCurrentPage] = useState(1);
-
   const usersPerPage = 10;
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
@@ -19,53 +17,57 @@ const DataModal = ({ isOpen, closeModal }) => {
   };
 
   return isOpen ? (
-    <ModalWrapper>
-      <Filtering />
-      <Overlay onClick={closeModal} />
-      <CloseButton onClick={closeModal}>X</CloseButton>
-      <Modal>
-        <Table>
-          <thead>
-            <tr>
-              <TableHeader>სტუდენტის სახელი და გვარი</TableHeader>
-              <TableHeader>სტატუსი</TableHeader>
-              <TableHeader>სქესი</TableHeader>
-              <TableHeader>ქულები</TableHeader>
-              <TableHeader>პირადი ნომერი</TableHeader>
-              <TableHeader>მაილი</TableHeader>
-              <TableHeader>მობილურის ნომერი</TableHeader>
-              <TableHeader>მისამართი</TableHeader>
-              <TableHeader>დაბადების თარიღი</TableHeader>
-            </tr>
-          </thead>
-          <tbody>
-            {currentUsers.map((user, index) => (
-              <TableRow key={index}>
-                <TableData>{user.name}</TableData>
-                <TableData>{user.status}</TableData>
-                <TableData>{user.gender}</TableData>
-                <TableData>{user.scores}</TableData>
-                <TableData>{user.id}</TableData>
-                <TableData>{user.email}</TableData>
-                <TableData>{user.mobile}</TableData>
-                <TableData>{user.address}</TableData>
-                <TableData>{user.date}</TableData>
-              </TableRow>
-            ))}
-          </tbody>
-        </Table>
-      </Modal>
-      <Pagination
-        totalPages={totalPages}
-        handlePageChange={handlePageChange}
-        setCurrentPage={setCurrentPage}
-        currentPage={currentPage}
-      />
-    </ModalWrapper>
+    <BigWrapper>
+      {" "}
+      <ModalWrapper>
+        <Filtering />
+        <Overlay onClick={closeModal} />
+        <CloseButton onClick={closeModal}>X</CloseButton>
+        <BigModal>
+          <Table>
+            <thead>
+              <tr>
+                <TableHeader>სტუდენტის სახელი და გვარი</TableHeader>
+                <TableHeader>სტატუსი</TableHeader>
+                <TableHeader>სქესი</TableHeader>
+                <TableHeader>ქულები</TableHeader>
+                <TableHeader>პირადი ნომერი</TableHeader>
+                <TableHeader>მაილი</TableHeader>
+                <TableHeader>მობილურის ნომერი</TableHeader>
+                <TableHeader>მისამართი</TableHeader>
+                <TableHeader>დაბადების თარიღი</TableHeader>
+              </tr>
+            </thead>
+            <tbody>
+              {currentUsers.map((user) => (
+                <TableRow key={user.id}>
+                  <TableData>{user.name}</TableData>
+                  <TableData>{user.status}</TableData>
+                  <TableData>{user.gender}</TableData>
+                  <TableData>{user.scores}</TableData>
+                  <TableData>{user.id}</TableData>
+                  <TableData>{user.email}</TableData>
+                  <TableData>{user.mobile}</TableData>
+                  <TableData>{user.address}</TableData>
+                  <TableData>{user.date}</TableData>
+                </TableRow>
+              ))}
+            </tbody>
+          </Table>
+        </BigModal>
+        <Pagination
+          totalPages={totalPages}
+          handlePageChange={handlePageChange}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
+      </ModalWrapper>
+    </BigWrapper>
   ) : null;
 };
 
-export default DataModal;
+export default Modal;
+const BigWrapper = styled.div``;
 const ModalWrapper = styled.div`
   position: relative;
   display: flex;
@@ -83,7 +85,7 @@ const Overlay = styled.div`
   background: rgba(0, 0, 0, 0.5);
   z-index: 1;
 `;
-const Modal = styled.div`
+const BigModal = styled.div`
   position: fixed;
   top: 55%;
   left: 50%;

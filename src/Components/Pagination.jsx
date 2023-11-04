@@ -1,11 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
-const Pagination = ({
-  totalPages,
-  handlePageChange,
-  setCurrentPage,
-  currentPage,
-}) => {
+const Pagination = ({ totalPages, handlePageChange, currentPage }) => {
   return (
     <PaginationWrapper>
       <PaginationButton
@@ -40,7 +35,6 @@ const PaginationWrapper = styled.div`
   margin-top: 1rem;
   z-index: 10;
   position: absolute;
-  top: 730px;
 `;
 
 const PaginationButton = styled.button`

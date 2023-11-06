@@ -2,14 +2,18 @@ import styled from "styled-components";
 import filter from "../../assets/filter.png";
 import search from "../../assets/search.png";
 import { Link } from "react-router-dom";
-const Filtering = () => {
+import { useState } from "react";
+import FilterModal from "./FilterModal";
+
+const Filtering = ({ onFilterButtonClick }) => {
   const handleSignOut = () => {
     localStorage.removeItem("imageURL");
     localStorage.removeItem("name");
   };
+
   return (
     <Filter>
-      <FilterWrapper>
+      <FilterWrapper onClick={onFilterButtonClick}>
         <FilterIcon src={filter} alt="filter icon" />
         <FilterTitle>Filter</FilterTitle>
       </FilterWrapper>
@@ -23,8 +27,8 @@ const Filtering = () => {
     </Filter>
   );
 };
-
 export default Filtering;
+
 const Filter = styled.div`
   margin-top: 1.5rem;
   width: 1200px;
@@ -72,6 +76,7 @@ const FilterWrapper = styled.div`
   align-items: center;
   padding-left: 1rem;
   gap: 3.5rem;
+  cursor: pointer;
 `;
 const SignOutButton = styled(Link)`
   color: white;

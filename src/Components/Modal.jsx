@@ -3,24 +3,64 @@ import userData from "../../data";
 import { useState } from "react";
 import Filtering from "./Filtering";
 import Pagination from "./Pagination";
+import FilterModal from "./FilterModal";
+import {
+  filterUsers,
+  updateGenderFilter,
+  updateStatusFilter,
+} from "../../utils/FilteringFuncs";
+
 const Modal = ({ isOpen, closeModal }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [isFilterModalOpen, setFilterModalOpen] = useState(false);
+
+  // states for filters (by default its checked)
+  const [statusFilter, setStatusFilter] = useState({
+    active: true,
+    inactive: true,
+  });
+  const [genderFilter, setGenderFilter] = useState({
+    male: true,
+    female: true,
+  });
+
+  //logic for pagination
   const usersPerPage = 10;
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = userData.slice(indexOfFirstUser, indexOfLastUser);
-
   const totalPages = Math.ceil(userData.length / usersPerPage);
+
+  // Create filtering functions using utility functions
+  const handleStatusFilterChange = (filter) => {
+    setStatusFilter(updateStatusFilter(filter, statusFilter));
+  };
+
+  const handleGenderFilterChange = (filter) => {
+    setGenderFilter(updateGenderFilter(filter, genderFilter));
+  };
+
+  const filteredUsers = filterUsers(currentUsers, statusFilter, genderFilter);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
-
+  const HandleFilterModal = () => {
+    setFilterModalOpen(!isFilterModalOpen);
+  };
   return isOpen ? (
     <BigWrapper>
       {" "}
       <ModalWrapper>
-        <Filtering />
+        <Filtering onFilterButtonClick={HandleFilterModal} />
+        {isFilterModalOpen && (
+          <FilterModal
+            statusFilter={statusFilter}
+            genderFilter={genderFilter}
+            onStatusFilterChange={handleStatusFilterChange}
+            onGenderFilterChange={handleGenderFilterChange}
+          />
+        )}
         <Overlay onClick={closeModal} />
         <CloseButton onClick={closeModal}>X</CloseButton>
         <BigModal>
@@ -39,7 +79,7 @@ const Modal = ({ isOpen, closeModal }) => {
               </tr>
             </thead>
             <tbody>
-              {currentUsers.map((user) => (
+              {filteredUsers.map((user) => (
                 <TableRow key={user.id}>
                   <TableData>{user.name}</TableData>
                   <TableData>{user.status}</TableData>
@@ -87,10 +127,11 @@ const Overlay = styled.div`
 `;
 const BigModal = styled.div`
   position: fixed;
-  top: 55%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
+  margin-top: 2rem;
   /* padding: 20px; */
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);

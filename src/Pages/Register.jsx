@@ -48,7 +48,7 @@ const Register = () => {
             alt="uploaded image"
             title="image"
             onClick={() => inputRef.current.click()}
-            hasUploadedImage={hasUploadedImage}
+            hasuploadedimage={hasUploadedImage ? 1 : 0}
           />
         </ImageContainer>
         <input
@@ -119,7 +119,7 @@ const ImageContainer = styled.div`
 const Image = styled.img`
   width: 100px;
   height: 100px;
-  border-radius: ${(props) => (props.hasUploadedImage ? "50%" : "none")};
+  border-radius: ${(props) => (props.hasuploadedimage ? "50%" : "none")};
   padding: 1rem;
   cursor: pointer;
 `;

@@ -5,6 +5,8 @@ import Landing from "./Pages/Landing";
 import Register from "./Pages/Register";
 import Dashboard from "./Pages/Dashboard";
 import ApiPage from "./Pages/ApiPage";
+import Navbar from "./Components/Navbar";
+import NavbarContent from "./Components/NavbarContent";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -21,13 +23,13 @@ const App = () => {
   useEffect(() => {
     // Check if the user is logged in
     const isLoggedIn =
-      localStorage.getItem("ImageUrl") && localStorage.getItem("name");
+      localStorage.getItem("imageURL") && localStorage.getItem("name");
 
     // If not logged in, redirect to the landing page
     if (!isLoggedIn) {
       navigate("/register");
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <>

@@ -21,11 +21,9 @@ const App = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if the user is logged in
     const isLoggedIn =
       localStorage.getItem("imageURL") && localStorage.getItem("name");
 
-    // If not logged in, redirect to the landing page
     if (!isLoggedIn) {
       navigate("/register");
     }

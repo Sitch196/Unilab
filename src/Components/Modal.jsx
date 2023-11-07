@@ -139,6 +139,9 @@ const BigModal = styled.div`
   width: 1200px;
   height: 600px;
   overflow: auto;
+  @media (height>1050px) {
+    top: 45%;
+  }
 `;
 
 const CloseButton = styled.button`

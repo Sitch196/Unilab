@@ -1,3 +1,4 @@
+// App.js
 import React, { useEffect } from "react";
 import { createGlobalStyle } from "styled-components";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -5,9 +6,7 @@ import Landing from "./Pages/Landing";
 import Register from "./Pages/Register";
 import Dashboard from "./Pages/Dashboard";
 import ApiPage from "./Pages/ApiPage";
-import Navbar from "./Components/Navbar";
-import NavbarContent from "./Components/NavbarContent";
-
+import NotFound from "./Pages/NotFound";
 const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
@@ -38,6 +37,8 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/api" element={<ApiPage />} />
+
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </>
